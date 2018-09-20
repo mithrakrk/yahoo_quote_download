@@ -112,7 +112,7 @@ def load_yahoo_quote(ticker, begindate, enddate, info = 'quote', format_output =
 		return alines.split('\n')
 
 	if format_output == 'dataframe':
-		nested_alines = [line.split(',') for line in alines.split('\n')[1:]]
-		cols = alines.split('\n')[0].split(',')
-		adf = pd.DataFrame.from_records(nested_alines[:-1], columns=cols)
+		nested_alines = [line.split(',') for line in alines.split('\n')]
+		cols = nested_alines[0]
+		adf = pd.DataFrame.from_records(nested_alines[1:len(nested_alines)-1], columns=cols)
 		return adf
